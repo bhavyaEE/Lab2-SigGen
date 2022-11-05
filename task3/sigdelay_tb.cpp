@@ -30,7 +30,9 @@ int main(int argc, char **argv, char **env) {
   top->rst = 0;
   top->wr = 1;
   top->rd = 1;
+  top->en = 1;
   top->offset = 64;
+  top->incr = 1;
   
   // intialize variables for analogue output
   vbdInitMicIn(RAM_SZ);
@@ -48,7 +50,7 @@ int main(int argc, char **argv, char **env) {
 
     // plot RAM input/output, send sample to DAC buffer, and print cycle count
     vbdPlot(int (top->mic_signal), 0, 255);
-    vbdPlot(int (top->delayed_signal), 0, 255);
+    vbdPlot(int (top->dout), 0, 255);
     vbdCycle(simcyc);
 
     // either simulation finished, or 'q' is pressed
@@ -61,3 +63,4 @@ int main(int argc, char **argv, char **env) {
   printf("Exiting\n");
   exit(0);
 }
+
